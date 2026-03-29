@@ -9,20 +9,20 @@ function App() {
       <div className="glass-panel">
         <h1 className="title">Premium Counter</h1>
         <p className="subtitle">Project crafted with React & Vite</p>
-        
+
         <div className="counter-body">
           <div className="count-display">
             {count}
           </div>
-          
+
           <div className="button-group">
-            <button 
+            <button
               className="btn btn-primary"
               onClick={() => setCount((count) => count + 1)}
             >
               Increment
             </button>
-            <button 
+            <button
               className="btn btn-secondary"
               onClick={() => setCount(0)}
               disabled={count === 0}
@@ -33,7 +33,7 @@ function App() {
         </div>
 
         <p className="hint">
-          Dynamic and beautiful using <code>useState</code>
+          Dynamic gaik and beautiful using <code>useState</code>
         </p>
       </div>
     </div>
