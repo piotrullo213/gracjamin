@@ -13,7 +13,6 @@ export default function Home() {
     seconds: 0
   });
 
-
   useEffect(() => {
     const timer = setInterval(() => {
       const difference = examDate.getTime() - new Date().getTime();

@@ -21,6 +21,7 @@
 .countdown-card h2 {
   background: linear-gradient(90deg, #38bdf8, #818cf8);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
