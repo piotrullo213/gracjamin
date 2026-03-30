@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Importuję podstawowe narzędzia Reacta: useState (do pamiętania danych) i useEffect (do uruchamiania kodu w tle)
 import { Link } from 'react-router-dom'; // Link służy mi do przechodzenia miedzy podstronami bez odświeżania całej strony w przeglądarce
 import './Home.css'; // Podpinam mój plik ze stylami CSS, żeby strona wyglądała nowocześnie
+import kapitanImg from '../assets/kapitan.jpg'; // Importuję zdjęcie
 
 // To jest mój główny "komponent" - czyli element budujący stronę o nazwie "Home" (Strona główna)
 export default function Home() {
@@ -17,6 +18,20 @@ export default function Home() {
     minutes: 0,
     seconds: 0
   });
+
+  // Stan do mojego easter egga! Liczę kliknięcia i sprawdzam czy pokazać kapitana.
+  const [clickCount, setClickCount] = useState(0);
+  const [isKapitanVisible, setIsKapitanVisible] = useState(false);
+
+  // Funkcja, która obsługuje kliknięcia w ikonkę książki
+  const handleEasterEggClick = () => {
+    setClickCount(prev => prev + 1);
+    // Jeśli klikniemy 5 razy, odpalamy niespodziankę
+    if (clickCount + 1 >= 5) {
+      setIsKapitanVisible(true);
+      setClickCount(0); // Resetujemy licznik
+    }
+  };
 
   // useEffect uruchamia się raz, od razu po załadowaniu strony. Tutaj odpalam mój zegar!
   useEffect(() => {
@@ -85,7 +100,13 @@ export default function Home() {
       <div className="features-grid">
         {/* Karta 1: Materiały */}
         <div className="card feature-card">
-          <div className="feature-icon">📚</div> {/* Zwykła emotka udająca ikonę wewnątrz mojego pudełka */}
+          <div
+            className="feature-icon"
+            style={{ cursor: 'pointer', userSelect: 'none' }}
+            onClick={handleEasterEggClick}
+          >
+            📚
+          </div> {/* Zwykła emotka udająca ikonę wewnątrz mojego pudełka - teraz z sekretnym kliknięciem! */}
           <h3>Materiały i Algorytmy</h3>
           <p>Zapoznaj się z rozwiązaniami krok po kroku z poprzednich lat (Aplikacje, Bazy Danych, Konsola).</p>
           {/* Przycisk (Link), który używam do przeniesienia widoku na moją podstronę "/materialy" */}
@@ -100,6 +121,18 @@ export default function Home() {
           <Link to="/postepy" className="btn btn-secondary mt-4">Zobacz postępy</Link>
         </div>
       </div>
+
+      {/* SEKRETNY EASTER EGG: To się pokaże tylko jak klikniesz 5 razy! */}
+      {isKapitanVisible && (
+        <div className="easter-egg-overlay" onClick={() => setIsKapitanVisible(false)}>
+          <div className="easter-egg-content">
+            <img src={kapitanImg} alt="Kapitan" className="kapitan-img" />
+            <div className="kapitan-glow">Ahoj Przygodo! 👨‍✈️🚢</div>
+            <p className="kapitan-sub">Egzamin INF.04 zdobyty!</p>
+            <button className="btn mt-4">Wróć do nauki</button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
