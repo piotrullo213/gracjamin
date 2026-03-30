@@ -1,92 +1,143 @@
+/* Sekcja z nagłówkiem i odliczaczem. Używam "display: flex" jako wirtualnej "szyny", rzędu w którym układam elementy pionowo z góry na dół (flex-direction: column) i wyśrodkowuję (align-items: center). */
 .hero-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 3rem;
+  /* Zostawiam 3 jednostki zapasu wolnego miejsca OD DOŁU, żeby nie zlewało się z kolejnymi kaflami */
 }
 
+/* Podtytuł (ten szary tekst na stronie obok tytułu). */
 .subtitle {
   color: var(--text-muted);
+  /* Podpinam moją zmienną koloru. To taki alias na ładny szary kolor. Jak zmienię wartość zmiennej, kolor zaktualizuje się wszędzie! */
   font-size: 1.1rem;
+  /* Ustawiam trochę powiększoną trzcionkę (podstawowa to 1rem) */
   max-width: 600px;
+  /* Nie chcę by tekst rozciągał się od krawędzi do krawędzi, ustawiam limit 600 pikseli by wymusić przejście do nowej linii. */
 }
 
 
+/* Styluję prostokątną "Kartę", na której znajduje się mój licznik do egzaminu. */
 .countdown-card {
   width: 100%;
+  /* Karta ma zająć całe miejsce w poziomie na małych ekranach... */
   max-width: 800px;
+  /* ...ale blokuję ją na max 800 pikselach, żeby ładnie wyglądało to na monitorze. */
+  /* Dodaję tło "background" w formie przejścia kolorów pod kątem od głównego koloru karty do głębokiego granatu. */
   background: linear-gradient(145deg, var(--bg-card) 0%, #1e1b4b 100%);
   border: 1px solid rgba(99, 102, 241, 0.2);
+  /* Lekka cienka granica otaczająca - taki delikatnie przeźroczysty fiolet */
 }
 
+/* Tutaj uzyskuję efekt Tęczowo-Kolorowego NAPISU mojego tekstu h2 z licznikiem */
 .countdown-card h2 {
   background: linear-gradient(90deg, #38bdf8, #818cf8);
+  /* Krok 1: Wrzucam ładny gradient (tło) pod napis */
   -webkit-background-clip: text;
+  /* Krok 2: Wymuszam na przeglądarce, aby obcięła to tło TYLKO DO OBSZARU ZAJMOWANEGO PRZEZ TEKST */
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* Krok 3: Udostępniam tło ustawiając właściwy tekst jako przezroczysty! Tekst staje się kolorowy! */
 }
 
+/* Gridy to system siatki CSS. W tym kontenerze osadzam moje 4 kwadraty licznika. */
 .timer-grid {
   display: grid;
+  /* Uruchamiam ułożenie typu "Siatka". */
   grid-template-columns: repeat(4, 1fr);
+  /* Wymuszam by w rzędzie były dokładnie 4 równe kolumny. "1fr" daje każdej równe 25% miejsca! */
   gap: 1rem;
+  /* Wstawiam ładną przerwę (szparę) między kafelkami z cyframi licznika. */
   margin-top: 2rem;
+  /* Powyżej dorzucam trochę pustego miejsca. */
 }
 
+/* Pojedyncze malutkie półprzeźroczyste pudełko na pojedynczą cyfrę (Dni, Godziny...). */
 .timer-box {
   display: flex;
   flex-direction: column;
+  /* Ustawienie pionowe, by liczba była na górze a etykietka na dole */
   background-color: rgba(0, 0, 0, 0.2);
+  /* Przezroczyste, odrobinę ciemniejsze tło */
   padding: 1.5rem;
+  /* Zostawiam sobie sporo miejsca między krawędzią a tekstem (margines wewnętrzny) */
   border-radius: 8px;
+  /* Łagodzę krawędzie zaokrągleniami, wygląda to bardziej premium. */
   border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Ledwie widoczna szarawa ramka */
 }
 
+/* Styl głównej gigantycznej cyfry mojego odliczania. */
 .timer-value {
   font-size: 3rem;
+  /* Ustawiam rozmiar na trzykrotnie większy (zasięg ogromny) */
   font-weight: 700;
+  /* Ustawiam wagę fontu na pogrubioną - cyfra jest potężniejsza. */
   color: var(--text-main);
+  /* Kolor docelowy (jasny/biały) */
   line-height: 1;
+  /* Wysokość równo 1, usuwam zbędne obramowania od góry dla cyfry. */
   text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+  /* Dodaję efekt glow - świetlany, cyberpunkowy cień dookoła tekstu :) */
 }
 
+/* Ten drobny dopisek poniżej cyfr: "MINUT", "SEKUND" */
 .timer-label {
   font-size: 0.875rem;
+  /* Maleńki, nie dominujący nad literami tekścik... */
   color: var(--text-muted);
+  /* ...nieco zszarzały/stłumiony kolor... */
   text-transform: uppercase;
+  /* ...ale nowocześnie zablokowany tylko na DUŻE LITERY (AllCaps) */
   letter-spacing: 2px;
+  /* Daję bardzo duży odstęp między l i t e r a m i żeby tekst optycznie się rozszedł. */
   margin-top: 0.5rem;
 }
 
 
+/* Pojemnik dolny trzymajacy moje główne wizytówki do stron z nauką */
 .features-grid {
   display: grid;
+  /* Znowu używam elastycznej siatki */
   grid-template-columns: 1fr 1fr;
+  /* Tyma razem chcę widzieć 2 równe kolumny obok siebie (po połowie ekranu każda) */
   gap: 2rem;
+  /* Odpycham je od siebie sporą przerwą na 2 remy */
 }
 
+/* Pojedyncza karta-wizytówka "Materiały..." itp. */
 .feature-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
+  /* Przyciągam teksty w karcie ściśle do lewej ściany krawędzi */
 }
 
+/* Ikonki (np edukacyjne) podbijam do rozmiaru dużej czcionki. */
 .feature-icon {
   font-size: 2.5rem;
+  /* Powiększam o dwa i pół raza. */
   margin-bottom: 1rem;
 }
 
+/* Akapit opisu w karcie. Chcę żeby dopasowywał się wysokością, tak aby przyciski na dole karty leżały zawsze na tej samej linii. */
 .feature-card p {
   color: var(--text-muted);
   flex-grow: 1;
+  /* Ta komenda to game-changer: karzę akapitowi puchnąć i zająć każdą wolną przestrzeń w pionie - to wpycha przycik z linkiem totalnie na spód karty! Obydwie są przez to w 100% równe. */
 }
 
+/* ! WAŻNE - MEDIA QUERIES odpowiadają za Responsywność na Telefony !
+   Informuję przeglądarkę, że poniższe zasady mają włączyć się WYŁĄCZNIE jeśli czyjś ekran ma mniej niż 768 pikseli (tryb mobilny)... */
 @media (max-width: 768px) {
+
+  /* ...więc na wąskim telefonie odliczanie zamiast z 4 kolumn stanie się panelem dwukolumnowym (2 rzędy po 2 boxy). */
   .timer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Karty funkcyjne też zrzucam jedna pod drugą (1 column), zamiast spłaszczać je wciskając obok siebie (były by nieczytelne!). */
   .features-grid {
     grid-template-columns: 1fr;
   }
