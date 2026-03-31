@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import './Materials.css';
+// Importuję React i hook useState służący do obsługi stanu (np. informacji o otwartej karcie)
+import React, { useState } from 'react'; 
+import './Materials.css'; // Import dedykowanych stylów css tej podstrony
 
+// Tablica ze spisem tematów egzaminacyjnych, która służy w tym pliku za prostą bazę danych
 const examTopics = [
     {
+        // Temat 1: Aplikacje Desktopowe
         id: "desktop",
         title: "Aplikacje Desktopowe (C# / WPF / WinForms)",
         description: "Projektowanie, programowanie i testowanie aplikacji okienkowych.",
@@ -237,43 +240,59 @@ print("Liczby pierwsze do 30:", sito_eratostenesa(30))`
     }
 ];
 
+// Główny komponent dla strony z materiałami, udostępniony całej aplikacji po przez "export default"
 export default function Materials() {
+    
+    // Stan przechowujący identyfikator (ID) obecnie otwartego tematu. 
+    // Na start ma wartość 'null', czyli żaden temat nie jest domyślnie otwarty.
     const [activeTopic, setActiveTopic] = useState(null);
 
+    // Funkcja wywoływana po kliknięciu w nagłówek karty tematu
     const toggleTopic = (id) => {
+        // Jeśli klikasz w temat, który jest już otwarty...
         if (activeTopic === id) {
-            setActiveTopic(null);
+            setActiveTopic(null); // ...zamyka go (zeruje stan)
         } else {
-            setActiveTopic(id);
+            setActiveTopic(id); // w przeciwnym razie ustawia nowe ID do stanu i rozwija klikniętą kartę
         }
     };
 
+    // Zwraca główną strukturę strony internetowej
     return (
-        <div className="materials-container">
+        <div className="materials-container"> {/* Główny kontener pilnujący ułożenia i maksymalnej szerokości treści */}
             <h1 className="materials-title">Materiały do egzaminu INF.04</h1>
 
+            {/* W tym elemencie wylądują wszystkie nasze wygenerowane karty tematów */}
             <div className="topics-list">
+                {/* Używamy array.map() by wygenerować na podstawie badanej tablicy "examTopics", 
+                    całą listę sekcji w sposób zautomatyzowany. */}
                 {examTopics.map((topic) => (
-                    <div key={topic.id} className="topic-card">
+                    <div key={topic.id} className="topic-card"> {/* Wymaganie Reacta: ustawiamy "key" aby komponent śledził zmiany tego elementu w liście */}
 
+                        {/* Przycisk nagłówka służący do klikania. 
+                            Jeśli aktualnie rozwinięta karta to ta konkretna, to dodaje klasę 'active'. */}
                         <button
                             className={`topic-btn ${activeTopic === topic.id ? 'active' : ''}`}
-                            onClick={() => toggleTopic(topic.id)}
+                            onClick={() => toggleTopic(topic.id)} // Po naciśnięciu wywołuje metodę przełączającą stan danej sekcji
                         >
                             <h2>{topic.title}</h2>
+                            {/* Pokazuje ikonkę strzałki zależną od tego, czy sekcja jest rozwinięta, czy nie */}
                             <span>{activeTopic === topic.id ? '▲' : '▼'}</span>
                         </button>
 
+                        {/* Poniższy kod zostanie wyrenderowany (pokazany) tylko wtedy, kiedy stan activeTopic będzie odpowiadał naszemu tematowi. */}
                         {activeTopic === topic.id && (
                             <div className="topic-content">
-                                <p className="topic-desc">{topic.description}</p>
+                                <p className="topic-desc">{topic.description}</p> {/* Opis tematu edukacyjnego ze struktury. */}
 
+                                {/* Wewnętrzna pętla dla instrukcji kodu: iterujemy po wpisach zawartych w 'steps' danego tematu. */}
                                 {topic.steps.map((step, index) => (
                                     <div key={index} className="step-box">
+                                        {/* Pomocnicze zmienianie numeru na podstawie indeksu (index + 1) do dynamicznego podpisu kroku. */}
                                         <h3>Krok {index + 1}: {step.title}</h3>
                                         <p>{step.description}</p>
-                                        <pre>
-                                            <code>{step.code}</code>
+                                        <pre> {/* Znacznik "<pre>" używamy po to, aby utrzymać oryginalne znaki (spacje i nowa linijka w kodzie programowania). */}
+                                            <code>{step.code}</code> {/* Polę renderujące surowy kod. */}
                                         </pre>
                                     </div>
                                 ))}

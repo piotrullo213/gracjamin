@@ -1,37 +1,43 @@
+/* Główny kontener na stronie, centruje treść i ogranicza maksymalną szerokość. */
 .materials-container {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto; /* Wyśrodkowuje kontener na stronie */
   padding: 2rem;
 }
 
+/* Główny tytuł podstrony */
 .materials-title {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
 }
 
+/* Lista tematów ułożona pionowo za pomocą flexboxa. */
 .topics-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.5rem; /* Odstępy między kartami */
 }
 
+/* Pojedyncza karta tematu. Dodano zaokrąglone rogi i delikatny cień. */
 .topic-card {
-  background-color: var(--bg-card);
+  background-color: var(--bg-card); /* Pobiera kolor tła ze zmiennych globalnych */
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  overflow: hidden; /* Przycina zawartość wystającą poza promienie rogów */
+  transition: box-shadow 0.3s ease; /* Płynna zmiana cienia przy najeżdżaniu */
 }
 
+/* Zwiększenie cienia karty po najechaniu kursorem. */
 .topic-card:hover {
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
+/* Przycisk nagłówka służący do rozwijania karty tematu. */
 .topic-btn {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Rozkłada tekst i ikonę na dwa końce */
   align-items: center;
   padding: 1.5rem;
   background: transparent;
@@ -41,53 +47,62 @@
   transition: background-color 0.2s;
 }
 
+/* Lekkie podświetlenie tła przycisku przy najechaniu. */
 .topic-btn:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Tytuł nagłówka wewnątrz przycisku */
 .topic-btn h2 {
   font-size: 1.3rem;
   margin: 0;
 }
 
+/* Styl aktywnej (otwartej) karty. Zmienia kolor tekstu i dodaje linię z dołu. */
 .topic-btn.active {
   color: var(--primary);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Kontener na opisy i kody po rozwinięciu karty */
 .topic-content {
   padding: 1.5rem;
 }
 
+/* Opis danego działu tematycznego */
 .topic-desc {
   color: var(--text-muted);
   margin-bottom: 2rem;
   font-size: 1.1rem;
 }
 
+/* Pojedynczy krok z kodem. Z lewej strony dodana pionowa kolorowa ramka z kolorem przodującym. */
 .step-box {
   margin-bottom: 2rem;
   padding-left: 1rem;
   border-left: 3px solid var(--primary);
 }
 
+/* Tytuł konkretnego kroku */
 .step-box h3 {
   margin-bottom: 0.5rem;
   color: var(--primary);
 }
 
+/* Opis kroku */
 .step-box p {
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
+/* Pole wyświetlające kod, stylizowane na wygląd edytora programistycznego. */
 .step-box pre {
-  background-color: #0f172a;
+  background-color: #0f172a; /* Ciemne tło edytora kodu */
   padding: 1.5rem;
   border-radius: 8px;
-  overflow-x: auto;
-  font-family: monospace;
+  overflow-x: auto; /* Pozwala na przewijanie kodu w pionie jeśli linia jest długa */
+  font-family: monospace; /* Czcionka o stałej szerokości liter */
   font-size: 0.95rem;
   color: #e2e8f0;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3); /* Wewnętrzny cień dający wrażenie wgłębienia */
 }
